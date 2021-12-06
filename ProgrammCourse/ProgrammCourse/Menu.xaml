@@ -1,0 +1,21 @@
+﻿<Window x:Class="ProgrammCourse.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgrammCourse"
+        mc:Ignorable="d"
+        Title="Menu" Height="450" Width="472.727" Style="{StaticResource windowStyle}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Клиенты" Grid.Column="1" Margin="143,154,141,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <Button Grid.ColumnSpan="2" Content="Заказы" HorizontalAlignment="Left" Margin="143,261,0,0" VerticalAlignment="Top" Width="181" Click="Button_Click_3"/>
+        <Button Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" Margin="10,373,0,0" VerticalAlignment="Top" Width="123" Height="26" Click="Button_Click_1"/>
+        <Button Grid.ColumnSpan="2" Content="Выход" HorizontalAlignment="Left" Margin="332,373,0,0" VerticalAlignment="Top" Width="123" Height="26" Click="Button_Click"/>
+        <Label x:Name="UserLabelFIO" Grid.ColumnSpan="2" Content="Label" HorizontalAlignment="Left" Margin="210,34,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

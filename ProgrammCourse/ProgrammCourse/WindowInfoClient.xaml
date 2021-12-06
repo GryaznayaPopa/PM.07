@@ -1,0 +1,28 @@
+﻿<Window x:Class="ProgrammCourse.WindowInfoClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgrammCourse"
+        mc:Ignorable="d"
+        Title="WindowInfoClient" Height="450" Width="556.632">
+    <Grid>
+        <Label x:Name="labelName" Content="Имя" HorizontalAlignment="Left" Margin="383,84,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelSurname" Content="Фамилия" HorizontalAlignment="Left" Margin="383,110,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelPatronymic" Content="Отчество" HorizontalAlignment="Left" Margin="383,136,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelCompanyname" Content="компания" HorizontalAlignment="Left" Margin="383,164,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelphonenumb" Content="телефон" HorizontalAlignment="Left" Margin="383,190,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelEmail" Content="поочта" HorizontalAlignment="Left" Margin="383,221,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy5" Content="Имя:" HorizontalAlignment="Left" Margin="264,84,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy6" Content="Фамилия:" HorizontalAlignment="Left" Margin="264,110,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy7" Content="Отчество:" HorizontalAlignment="Left" Margin="264,136,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy8" Content="Компании:" HorizontalAlignment="Left" Margin="264,162,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy9" Content="номер телефона:" HorizontalAlignment="Left" Margin="264,190,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy10" Content="электронная почта:" HorizontalAlignment="Left" Margin="264,221,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LabIdClient" Content="код" HorizontalAlignment="Left" Margin="383,58,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy12" Content="Клиент номер:" HorizontalAlignment="Left" Margin="264,58,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="CloseButtoneClientInfo" Content="Закрыть" HorizontalAlignment="Left" Margin="277,307,0,0" VerticalAlignment="Top" Width="75" Click="CloseButtoneClientInfo_Click"/>
+        <Image x:Name="ImageClient" HorizontalAlignment="Left" Height="162" Margin="50,75,0,0" VerticalAlignment="Top" Width="171"/>
+
+    </Grid>
+</Window>

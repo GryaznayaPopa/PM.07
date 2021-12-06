@@ -1,0 +1,40 @@
+﻿<Window x:Class="ProgrammCourse.ContractWindowList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgrammCourse"
+        mc:Ignorable="d"
+        Title="ContractWindowList" Height="450" Width="948.729" Style="{StaticResource windowStyle}">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources/Themes/DefaultTheme.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Button Content="Создать заказ" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Width="143" Height="29"/>
+        <DataGrid x:Name="dataGridContract" HorizontalAlignment="Left" Height="206" Margin="10,203,0,0" VerticalAlignment="Top" Width="749" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер заказа" Binding="{Binding ContractNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientFIO}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата составления" Binding="{Binding DataPrepar}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата исполнения" Binding="{Binding DataExec}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Состояние оплаты" Binding="{Binding PayStatus}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Подробности заказа" Binding="{Binding ContractDetails}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус заказа" Binding="{Binding ContractStat}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BackMenuContrButton" Content="Назад" HorizontalAlignment="Left" Margin="790,266,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.663,0.675" Height="29" Click="BackMenuContrButton_Click"/>
+        <Button x:Name="ExitButtonContract" Content="Выход" HorizontalAlignment="Left" Margin="790,366,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.663,0.675" Height="29" Click="ExitButtonContract_Click"/>
+        <Label x:Name="LabelUserFIO" Content="Label" HorizontalAlignment="Left" Margin="578,10,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="ImageUser" HorizontalAlignment="Left" Height="100" Margin="457,14,0,0" VerticalAlignment="Top" Width="111" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.383"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+    </Grid>
+</Window>

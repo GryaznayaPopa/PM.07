@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ip35Models" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="company_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="16" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="image" Type="text" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="id_contract" />
+          </Key>
+          <Property Name="id_contract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="date_preparation" Type="date" Nullable="false" />
+          <Property Name="date_execution" Type="date" Nullable="false" />
+          <Property Name="id_payment_status" Type="int" Nullable="false" />
+          <Property Name="contract_details" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_contract_status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract_status">
+          <Key>
+            <PropertyRef Name="id_contract_status" />
+          </Key>
+          <Property Name="id_contract_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract_status_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="id_dept" />
+          </Key>
+          <Property Name="id_dept" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dept_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="list_purpose">
+          <Key>
+            <PropertyRef Name="id_purpose" />
+          </Key>
+          <Property Name="id_purpose" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_contract" Type="int" Nullable="false" />
+          <Property Name="id_service" Type="int" Nullable="false" />
+          <Property Name="id_dept" Type="int" Nullable="false" />
+          <Property Name="id_status_service" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment_status">
+          <Key>
+            <PropertyRef Name="id_payment_status" />
+          </Key>
+          <Property Name="id_payment_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_payment status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_dept" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_service" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status_service">
+          <Key>
+            <PropertyRef Name="id_status_service" />
+          </Key>
+          <Property Name="id_status_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_status_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_position" Type="int" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="image" Type="text" />
+        </EntityType>
+        <Association Name="FK_Contract_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Contract_status">
+          <End Role="Contract_status" Type="Self.Contract_status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract_status">
+              <PropertyRef Name="id_contract_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_contract_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Payment_status">
+          <End Role="Payment_status" Type="Self.Payment_status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_status">
+              <PropertyRef Name="id_payment_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_payment_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="id_contract" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Dept">
+          <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="id_dept" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_dept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Status_service">
+          <End Role="Status_service" Type="Self.Status_service" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_service">
+              <PropertyRef Name="id_status_service" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_status_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_Dept">
+          <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+          <End Role="Position" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="id_dept" />
+            </Principal>
+            <Dependent Role="Position">
+              <PropertyRef Name="id_dept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ip35ModelsContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract_status" EntityType="Self.Contract_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="list_purpose" EntityType="Self.list_purpose" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_status" EntityType="Self.Payment_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_service" EntityType="Self.Status_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contract_Client" Association="Self.FK_Contract_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Contract_status" Association="Self.FK_Contract_Contract_status">
+            <End Role="Contract_status" EntitySet="Contract_status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Payment_status" Association="Self.FK_Contract_Payment_status">
+            <End Role="Payment_status" EntitySet="Payment_status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Contract" Association="Self.FK_list_purpose_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Dept" Association="Self.FK_list_purpose_Dept">
+            <End Role="Dept" EntitySet="Dept" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Service" Association="Self.FK_list_purpose_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Status_service" Association="Self.FK_list_purpose_Status_service">
+            <End Role="Status_service" EntitySet="Status_service" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_Dept" Association="Self.FK_Position_Dept">
+            <End Role="Dept" EntitySet="Dept" />
+            <End Role="Position" EntitySet="Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Position" Association="Self.FK_User_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ip35Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="company_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Client" FromRole="Client" ToRole="Contract" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="id_contract" />
+          </Key>
+          <Property Name="id_contract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="date_preparation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_execution" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_payment_status" Type="Int32" Nullable="false" />
+          <Property Name="contract_details" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_contract_status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Contract_Client" FromRole="Contract" ToRole="Client" />
+          <NavigationProperty Name="Contract_status" Relationship="Self.FK_Contract_Contract_status" FromRole="Contract" ToRole="Contract_status" />
+          <NavigationProperty Name="Payment_status" Relationship="Self.FK_Contract_Payment_status" FromRole="Contract" ToRole="Payment_status" />
+          <NavigationProperty Name="list_purpose" Relationship="Self.FK_list_purpose_Contract" FromRole="Contract" ToRole="list_purpose" />
+        </EntityType>
+        <EntityType Name="Contract_status">
+          <Key>
+            <PropertyRef Name="id_contract_status" />
+          </Key>
+          <Property Name="id_contract_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract_status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Contract_status" FromRole="Contract_status" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="id_dept" />
+          </Key>
+          <Property Name="id_dept" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dept_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="list_purpose" Relationship="Self.FK_list_purpose_Dept" FromRole="Dept" ToRole="list_purpose" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Position_Dept" FromRole="Dept" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="list_purpose">
+          <Key>
+            <PropertyRef Name="id_purpose" />
+          </Key>
+          <Property Name="id_purpose" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_contract" Type="Int32" Nullable="false" />
+          <Property Name="id_service" Type="Int32" Nullable="false" />
+          <Property Name="id_dept" Type="Int32" Nullable="false" />
+          <Property Name="id_status_service" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_list_purpose_Contract" FromRole="list_purpose" ToRole="Contract" />
+          <NavigationProperty Name="Dept" Relationship="Self.FK_list_purpose_Dept" FromRole="list_purpose" ToRole="Dept" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_list_purpose_Service" FromRole="list_purpose" ToRole="Service" />
+          <NavigationProperty Name="Status_service" Relationship="Self.FK_list_purpose_Status_service" FromRole="list_purpose" ToRole="Status_service" />
+        </EntityType>
+        <EntityType Name="Payment_status">
+          <Key>
+            <PropertyRef Name="id_payment_status" />
+          </Key>
+          <Property Name="id_payment_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_payment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Payment_status" FromRole="Payment_status" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_dept" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dept" Relationship="Self.FK_Position_Dept" FromRole="Position" ToRole="Dept" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Position" FromRole="Position" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="list_purpose" Relationship="Self.FK_list_purpose_Service" FromRole="Service" ToRole="list_purpose" />
+        </EntityType>
+        <EntityType Name="Status_service">
+          <Key>
+            <PropertyRef Name="id_status_service" />
+          </Key>
+          <Property Name="id_status_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="list_purpose" Relationship="Self.FK_list_purpose_Status_service" FromRole="Status_service" ToRole="list_purpose" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_position" Type="Int32" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_User_Position" FromRole="User" ToRole="Position" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Contract_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Contract_status">
+          <End Role="Contract_status" Type="Self.Contract_status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract_status">
+              <PropertyRef Name="id_contract_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_contract_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Payment_status">
+          <End Role="Payment_status" Type="Self.Payment_status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_status">
+              <PropertyRef Name="id_payment_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_payment_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="id_contract" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Dept">
+          <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="id_dept" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_dept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_Dept">
+          <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+          <End Role="Position" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="id_dept" />
+            </Principal>
+            <Dependent Role="Position">
+              <PropertyRef Name="id_dept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_purpose_Status_service">
+          <End Role="Status_service" Type="Self.Status_service" Multiplicity="1" />
+          <End Role="list_purpose" Type="Self.list_purpose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_service">
+              <PropertyRef Name="id_status_service" />
+            </Principal>
+            <Dependent Role="list_purpose">
+              <PropertyRef Name="id_status_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Contract_status" EntityType="Self.Contract_status" />
+          <EntitySet Name="Dept" EntityType="Self.Dept" />
+          <EntitySet Name="list_purpose" EntityType="Self.list_purpose" />
+          <EntitySet Name="Payment_status" EntityType="Self.Payment_status" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="Status_service" EntityType="Self.Status_service" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Contract_Client" Association="Self.FK_Contract_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Contract_status" Association="Self.FK_Contract_Contract_status">
+            <End Role="Contract_status" EntitySet="Contract_status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Payment_status" Association="Self.FK_Contract_Payment_status">
+            <End Role="Payment_status" EntitySet="Payment_status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Contract" Association="Self.FK_list_purpose_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Dept" Association="Self.FK_list_purpose_Dept">
+            <End Role="Dept" EntitySet="Dept" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_Dept" Association="Self.FK_Position_Dept">
+            <End Role="Dept" EntitySet="Dept" />
+            <End Role="Position" EntitySet="Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Service" Association="Self.FK_list_purpose_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_purpose_Status_service" Association="Self.FK_list_purpose_Status_service">
+            <End Role="Status_service" EntitySet="Status_service" />
+            <End Role="list_purpose" EntitySet="list_purpose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Position" Association="Self.FK_User_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ip35ModelsContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ip35Models.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="ip35Models.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="id_contract" ColumnName="id_contract" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="date_preparation" ColumnName="date_preparation" />
+                <ScalarProperty Name="date_execution" ColumnName="date_execution" />
+                <ScalarProperty Name="id_payment_status" ColumnName="id_payment_status" />
+                <ScalarProperty Name="contract_details" ColumnName="contract_details" />
+                <ScalarProperty Name="id_contract_status" ColumnName="id_contract_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract_status">
+            <EntityTypeMapping TypeName="ip35Models.Contract_status">
+              <MappingFragment StoreEntitySet="Contract_status">
+                <ScalarProperty Name="id_contract_status" ColumnName="id_contract_status" />
+                <ScalarProperty Name="contract_status_name" ColumnName="contract_status_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dept">
+            <EntityTypeMapping TypeName="ip35Models.Dept">
+              <MappingFragment StoreEntitySet="Dept">
+                <ScalarProperty Name="id_dept" ColumnName="id_dept" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="list_purpose">
+            <EntityTypeMapping TypeName="ip35Models.list_purpose">
+              <MappingFragment StoreEntitySet="list_purpose">
+                <ScalarProperty Name="id_purpose" ColumnName="id_purpose" />
+                <ScalarProperty Name="id_contract" ColumnName="id_contract" />
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="id_dept" ColumnName="id_dept" />
+                <ScalarProperty Name="id_status_service" ColumnName="id_status_service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_status">
+            <EntityTypeMapping TypeName="ip35Models.Payment_status">
+              <MappingFragment StoreEntitySet="Payment_status">
+                <ScalarProperty Name="id_payment_status" ColumnName="id_payment_status" />
+                <ScalarProperty Name="name_payment_status" ColumnName="name_payment status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="ip35Models.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="name_position" ColumnName="name_position" />
+                <ScalarProperty Name="id_dept" ColumnName="id_dept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="ip35Models.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="name_service" ColumnName="name_service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_service">
+            <EntityTypeMapping TypeName="ip35Models.Status_service">
+              <MappingFragment StoreEntitySet="Status_service">
+                <ScalarProperty Name="id_status_service" ColumnName="id_status_service" />
+                <ScalarProperty Name="service_status_name" ColumnName="service_status_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ip35Models.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
